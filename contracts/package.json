@@ -23,7 +23,8 @@
     "dependencies": {
         "fabric-contract-api": "unstable",
         "fabric-shim": "unstable",
-        "ts-md5": "^1.2.4"
+        "ts-md5": "^1.2.4",
+        "inquirer": "^6.2.0"
     },
     "devDependencies": {
         "@types/chai": "^4.1.4",

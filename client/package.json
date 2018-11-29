@@ -1,0 +1,37 @@
+{
+    "name": "client",
+    "version": "0.0.1",
+    "description": "CLI UI for the car-lease-demo",
+    "main": "index.js",
+    "engines": {
+        "node": ">=8",
+        "npm": ">=5"
+    },
+    "scripts": {
+        "start": "fabric-chaincode-node start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/awjh-ibm/car-lease-demo.git"
+    },
+    "author": "John Doe",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/awjh-ibm/car-lease-demo/issues"
+    },
+    "homepage": "https://github.com/awjh-ibm/car-lease-demo#readme",
+    "dependencies": {
+        "@types/inquirer": "0.0.43",
+        "chalk-pipe": "^2.0.0",
+        "fabric-contract-api": "unstable",
+        "fabric-shim": "unstable",
+        "inquirer": "^6.2.0",
+        "install": "^0.12.2",
+        "npm": "^6.4.1"
+    },
+    "devDependencies": {
+        "ts-node": "^7.0.1",
+        "tslint": "^5.11.0",
+        "typescript": "^3.1.6"
+    }
+}
