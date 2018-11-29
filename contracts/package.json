@@ -1,6 +1,6 @@
 {
     "name": "contracts",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "description": "My Smart Contract",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -22,7 +22,8 @@
     "license": "Apache-2.0",
     "dependencies": {
         "fabric-contract-api": "unstable",
-        "fabric-shim": "unstable"
+        "fabric-shim": "unstable",
+        "ts-md5": "^1.2.4"
     },
     "devDependencies": {
         "@types/chai": "^4.1.4",

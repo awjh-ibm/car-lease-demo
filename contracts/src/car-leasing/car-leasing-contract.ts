@@ -2,20 +2,41 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Context, Contract } from 'fabric-contract-api';
+import { Context, Contract, Transaction, Returns } from 'fabric-contract-api';
+import { Participant, ParticipantTypes } from '../participants/participant-def';
+import { Car } from './car-leasing-def';
+import { Md5 } from 'ts-md5/dist/md5';
 
-export class MyContract extends Contract {
+export class CarLeasing extends Contract {
+    @Transaction()
+    @Returns('string')
+    async createCar(ctx: Context, model: string, colour: string) {
+        const manufacturer = new Participant('Ferrari', ParticipantTypes.MANUFACTURER); /// MAKE IT BE THE CALLER
 
-    public async instantiate(ctx: Context): Promise<any> {
-        console.info('instantiate');
+        const car = new Car(manufacturer, model, colour);
+
+        const existingCars = await this.getAllCars(ctx)
+
+        let vin = Md5.hashAsciiStr(ctx.stub.createCompositeKey('manufacturer/cars', [manufacturer.name, model, colour, existingCars.length.toString()])).toString()
+
+        car.VIN = vin;
+
+        await ctx.stub.putState(vin.toString(), car.serialize())
+
+        return vin
     }
 
-    public async transaction1(ctx: Context, arg1: string): Promise<any> {
-        console.info('transaction1', arg1);
-    }
+    @Transaction(false)
+    @Returns('string')
+    getAllCars({stub}: Context) {
+        const cars = stub.getQueryResult(JSON.stringify({
+            selector: {
+                VIN: {
+                    exists: true
+                }
+            }
+        }))
 
-    public async transaction2(ctx: Context, arg1: string, arg2: string): Promise<any> {
-        console.info('transaction2', arg1, arg2);
+        return JSON.stringify(cars);
     }
-
 }

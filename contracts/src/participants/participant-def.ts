@@ -1,24 +1,24 @@
 import { Object, Property } from 'fabric-contract-api';
 
+export enum ParticipantTypes {
+    REGULATOR = 1,
+    MANUFACTURER,
+    LEASING_COMPANY,
+    SCRAP_MERCHANT,
+    PRIVATE_OWNER
+} 
+
 @Object()
 export class Participant {
 
     @Property()
-    private name: string;
+    public name: string;
     
     @Property()
-    private type: string;
+    public type: ParticipantTypes;
 
-    constructor(name: string, type: string) {
+    constructor(name: string, type: ParticipantTypes) {
         this.name = name;
         this.type = type;
-    }
-
-    isType(desiredType: string):boolean {
-        return this.type == desiredType;
-    }
-
-    getName(): string {
-        return this.name;
     }
 }
